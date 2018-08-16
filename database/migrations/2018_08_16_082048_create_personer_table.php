@@ -13,6 +13,7 @@ class CreatePersonerTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('personer', function (Blueprint $table) {
             $table->increments('id');
             $table->string('navn');
@@ -26,6 +27,8 @@ class CreatePersonerTable extends Migration
             $table->foreign('medarbejder_id')->references('id')->on('medarbejdere');
             $table->timestamps();
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -35,6 +38,7 @@ class CreatePersonerTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('personer');
     }
 }

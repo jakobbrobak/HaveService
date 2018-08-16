@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKunderTable extends Migration
+class CreateLokationerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,20 @@ class CreateKunderTable extends Migration
      */
     public function up()
     {
-        Schema::create('kunder', function (Blueprint $table) {
+        Schema::disableForeignKeyConstraints();
+        Schema::create('lokationer', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('opgave_id');
-            $table->foreign('opgave_id')->references('id')->on('opgaver');
+            $table->string('adresse');
+            $table->integer('postNr');
+            $table->string('by');
             $table->unsignedInteger('person_id');
             $table->foreign('person_id')->references('id')->on('personer');
+            $table->unsignedInteger('opgave_id');
+            $table->foreign('opgave_id')->references('id')->on('opgaver');
             $table->timestamps();
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -30,6 +36,7 @@ class CreateKunderTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kunder');
+        Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('lokationer');
     }
 }

@@ -13,6 +13,7 @@ class CreateSpecielVærktøjerTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('speciel_værktøjer', function (Blueprint $table) {
             $table->increments('id');
             $table->string('navn');
@@ -23,6 +24,8 @@ class CreateSpecielVærktøjerTable extends Migration
             $table->foreign('medarbejder_id')->references('id')->on('medarbejdere');
             $table->timestamps();
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -32,6 +35,7 @@ class CreateSpecielVærktøjerTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('speciel_værktøjer');
     }
 }

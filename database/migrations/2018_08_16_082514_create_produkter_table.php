@@ -13,6 +13,7 @@ class CreateProdukterTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('produkter', function (Blueprint $table) {
             $table->increments('id');
             $table->string('navn');
@@ -22,6 +23,8 @@ class CreateProdukterTable extends Migration
             $table->foreign('ordre_linje_id')->references('id')->on('ordre_linjer');
             $table->timestamps();
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -31,6 +34,7 @@ class CreateProdukterTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('produkter');
     }
 }

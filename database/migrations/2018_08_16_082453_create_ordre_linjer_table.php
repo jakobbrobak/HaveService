@@ -13,6 +13,7 @@ class CreateOrdreLinjerTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('ordre_linjer', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('antal');
@@ -22,6 +23,8 @@ class CreateOrdreLinjerTable extends Migration
             $table->foreign('opgave_id')->references('id')->on('opgaver');
             $table->timestamps();
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -31,6 +34,7 @@ class CreateOrdreLinjerTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('ordre_linjer');
     }
 }
