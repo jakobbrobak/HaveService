@@ -17,6 +17,10 @@ class CreateSpecielVærktøjerTable extends Migration
             $table->increments('id');
             $table->string('navn');
             $table->string('beskrivelse');
+            $table->unsignedInteger('opgave_id');
+            $table->foreign('opgave_id')->references('id')->on('opgaver');
+            $table->unsignedInteger('medarbejder_id');
+            $table->foreign('medarbejder_id')->references('id')->on('medarbejdere');
             $table->timestamps();
         });
     }

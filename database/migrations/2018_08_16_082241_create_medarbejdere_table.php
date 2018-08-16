@@ -17,6 +17,12 @@ class CreateMedarbejdereTable extends Migration
             $table->increments('id');
             $table->string('lønsats');
             $table->string('type');
+            $table->unsignedInteger('opgave_id');
+            $table->foreign('opgave_id')->references('id')->on('opgaver');
+            $table->unsignedInteger('person_id');
+            $table->foreign('person_id')->references('id')->on('personer');
+            $table->unsignedInteger('speciel_værktøj_id');
+            $table->foreign('speciel_værktøj_id')->references('id')->on('speciel_værktøjer');
             $table->timestamps();
         });
     }

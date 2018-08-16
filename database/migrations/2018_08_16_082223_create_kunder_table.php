@@ -15,7 +15,10 @@ class CreateKunderTable extends Migration
     {
         Schema::create('kunder', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('kundeNr');
+            $table->unsignedInteger('opgave_id');
+            $table->foreign('opgave_id')->references('id')->on('opgaver');
+            $table->unsignedInteger('person_id');
+            $table->foreign('person_id')->references('id')->on('personer');
             $table->timestamps();
         });
     }

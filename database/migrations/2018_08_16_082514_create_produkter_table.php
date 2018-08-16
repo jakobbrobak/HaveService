@@ -18,6 +18,8 @@ class CreateProdukterTable extends Migration
             $table->string('navn');
             $table->string('beskrivelse');
             $table->integer('pris');
+            $table->unsignedInteger('ordre_linje_id');
+            $table->foreign('ordre_linje_id')->references('id')->on('ordre_linjer');
             $table->timestamps();
         });
     }

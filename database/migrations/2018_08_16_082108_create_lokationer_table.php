@@ -18,6 +18,10 @@ class CreateLokationerTable extends Migration
             $table->string('adresse');
             $table->integer('postNr');
             $table->string('by');
+            $table->unsignedInteger('person_id');
+            $table->foreign('person_id')->references('id')->on('personer');
+            $table->unsignedInteger('opgave_id');
+            $table->foreign('opgave_id')->references('id')->on('opgaver');
             $table->timestamps();
         });
     }

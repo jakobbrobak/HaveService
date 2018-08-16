@@ -16,6 +16,10 @@ class CreateOrdreLinjerTable extends Migration
         Schema::create('ordre_linjer', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('antal');
+            $table->unsignedInteger('produkt_id');
+            $table->foreign('produkt_id')->references('id')->on('produkter');
+            $table->unsignedInteger('opgave_id');
+            $table->foreign('opgave_id')->references('id')->on('opgaver');
             $table->timestamps();
         });
     }
